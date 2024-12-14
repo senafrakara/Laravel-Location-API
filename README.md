@@ -149,6 +149,16 @@ This is a Laravel-based API for managing locations. The API allows users to crea
 
 2. To test the API endpoints, you can use tools like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/).
 
+![img_3.png](img_3.png)
+
+![img_4.png](img_4.png)
+
 ## Documentation
 
 The API documentation is available at `/api/documentation`. You can view all the endpoints and their descriptions in Swagger UI format.
+
+![img.png](img.png)
+
+![img_2.png](img_2.png)
+
+![img_1.png](img_1.png)
