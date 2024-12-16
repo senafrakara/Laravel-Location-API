@@ -59,7 +59,7 @@ class LocationTest extends TestCase
             'color' => '#00FF00'
         ];
 
-        $response = $this->putJson("/api/locations/{$location->id}", $updateData);
+        $response = $this->patchJson("/api/locations/{$location->id}", $updateData);
 
         $response
             ->assertStatus(200)
@@ -69,11 +69,32 @@ class LocationTest extends TestCase
     public function test_routing_endpoint()
     {
         $locations = Location::factory()->count(3)->create();
+        $startLocation = $locations->first();
 
-        $response = $this->getJson('/api/locations/route');
-
+        $response = $this->postJson('/api/locations/route', [
+            'start_location_id' => $startLocation->id,
+        ]);
         $response
             ->assertStatus(200)
-            ->assertJsonCount(3);
+            ->assertJsonCount(2, 'sorted_locations')
+            ->assertJsonStructure([
+                'start_location' => [
+                    'id',
+                    'name',
+                    'latitude',
+                    'longitude',
+                    'color',
+                ],
+                'sorted_locations' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'latitude',
+                        'longitude',
+                        'color',
+                        'distance',
+                    ],
+                ],
+            ]);
     }
 }

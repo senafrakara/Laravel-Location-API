@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Location extends Model
 {
     use HasFactory;
+    const EARTH_RADIUS = 6371;
     protected $fillable = [
         'name',
         'latitude',
@@ -22,7 +23,11 @@ class Location extends Model
 
     public function calculateDistanceLocations(Location $location): float|int
     {
-        $earthRadius = 6371;
+        if (is_null($this->latitude) || is_null($this->longitude) ||
+            is_null($location->latitude) || is_null($location->longitude)) {
+            throw new \Exception('Coordinates are missing for distance calculation.');
+        }
+
         $latFrom = deg2rad($this->latitude);
         $lonFrom = deg2rad($this->longitude);
         $latTo = deg2rad($location->latitude);
@@ -38,6 +43,6 @@ class Location extends Model
                 )
             );
 
-        return $angle * $earthRadius;
+        return $angle * self::EARTH_RADIUS;
     }
 }

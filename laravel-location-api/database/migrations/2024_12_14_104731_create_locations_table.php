@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
-            $table->string('color', 7)->default('#FF0000');
+            $table->string('color', 7)->default('#FF0000')->nullable();
             $table->timestamps();
         });
     }

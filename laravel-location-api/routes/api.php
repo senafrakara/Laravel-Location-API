@@ -15,6 +15,6 @@ Route::prefix('locations')
     Route::get('/', [LocationController::class, 'index']);
     Route::post('/', [LocationController::class, 'store']);
     Route::get('/{location}', [LocationController::class, 'show']);
-    Route::put('/{location}', [LocationController::class, 'update']);
-    Route::get('/route', [LocationController::class, 'route']);
+    Route::patch('/{location}', [LocationController::class, 'update']);
+    Route::post('/route', [LocationController::class, 'route']);
 });
